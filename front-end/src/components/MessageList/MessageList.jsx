@@ -1,8 +1,17 @@
 import React from 'react';
+import { useChat } from '../../contexts/ChatContext';
 import Message from '../Message/Message';
 import './MessageList.css';
 
-const MessageList = ({ messages }) => {
+const MessageList = () => {
+  const { messages, isLoading } = useChat();
+  const messagesEndRef = React.useRef(null);
+
+  // Auto-scroll to bottom when messages change
+  React.useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   return (
     <div className="message-list">
       {messages.map((message) => (
@@ -12,6 +21,14 @@ const MessageList = ({ messages }) => {
           isUser={message.sender === 'user'}
         />
       ))}
+      {isLoading && (
+        <div className="typing-bubble">
+          <div className="typing-dot"></div>
+          <div className="typing-dot"></div>
+          <div className="typing-dot"></div>
+        </div>
+      )}
+      <div ref={messagesEndRef} />
     </div>
   );
 };

@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useChat } from '../../contexts/ChatContext';
 import './UserInput.css';
 
-const UserInput = ({ onSendMessage }) => {
-  const [message, setMessage] = useState('');
+const UserInput = () => {
+  const { inputValue, setInputValue, sendMessage, isLoading } = useChat();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (message.trim() === '') return;
-    
-    onSendMessage(message);
-    setMessage('');
+    if (inputValue.trim() === '' || isLoading) return;
+    sendMessage();
   };
 
   const handleKeyPress = (e) => {
@@ -24,16 +23,18 @@ const UserInput = ({ onSendMessage }) => {
       <div className="input-container">
         <input
           type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Type your message..."
           className="message-input"
+          disabled={isLoading}
         />
         <button 
           type="submit" 
           className="send-button"
-          disabled={!message.trim()}
+          disabled={!inputValue.trim() || isLoading}
+          aria-label="Send message"
         >
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
