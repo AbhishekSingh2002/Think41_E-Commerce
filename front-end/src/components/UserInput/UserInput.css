@@ -1,0 +1,74 @@
+.user-input {
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 24px;
+  padding: 5px 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #333;
+  resize: none;
+  max-height: 120px;
+  min-height: 20px;
+  line-height: 1.4;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 0 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4a90e2;
+  transition: color 0.2s;
+}
+
+.send-button:disabled {
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+.send-button:not(:disabled):hover {
+  color: #357abd;
+}
+
+.send-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Focus styles */
+.input-container:focus-within {
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .user-input {
+    padding: 10px;
+  }
+  
+  .input-container {
+    padding: 3px 12px;
+  }
+  
+  .message-input {
+    font-size: 16px; /* Larger font size for mobile */
+  }
+}
